@@ -1,0 +1,22 @@
+server:
+  port: 9999
+
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  datasource:
+    url: ${RESOURCE_SPRING_DATASOURCE_URL}
+    username: ${RESOURCE_SPRING_DATASOURCE_USERNAME}
+    password: ${RESOURCE_SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDBDialect
+        format_sql: true
+
+logging.level:
+  org.hibernate.SQL: debug
