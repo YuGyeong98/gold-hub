@@ -1,0 +1,54 @@
+services:
+  auth-server:
+    build:
+      context: ./auth-server
+    ports:
+      - "8888:8888"
+      - "50051:50051"
+    environment:
+      SPRING_DATASOURCE_URL: ${AUTH_SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${AUTH_SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${AUTH_SPRING_DATASOURCE_PASSWORD}
+    depends_on:
+      - db_auth
+  db_auth:
+    image: mariadb:latest
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_auth_data:/var/lib/mariadb
+    environment:
+      MARIADB_DATABASE: ${AUTH_MARIADB_DATABASE}
+      MARIADB_USER: ${AUTH_MARIADB_USER}
+      MARIADB_PASSWORD: ${AUTH_MARIADB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${AUTH_MARIADB_ROOT_PASSWORD}
+    restart: always
+
+  resource-server:
+    build:
+      context: ./resource-server
+    ports:
+      - "9999:9999"
+      - "50052:50052"
+    environment:
+      SPRING_DATASOURCE_URL: ${RESOURCE_SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${RESOURCE_SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${RESOURCE_SPRING_DATASOURCE_PASSWORD}
+    depends_on:
+      - db_resource
+  db_resource:
+    image: mariadb:latest
+    ports:
+      - "3308:3306"
+    volumes:
+      - db_resource_data:/var/lib/mariadb
+    environment:
+      MARIADB_DATABASE: ${RESOURCE_MARIADB_DATABASE}
+      MARIADB_USER: ${RESOURCE_MARIADB_USER}
+      MARIADB_PASSWORD: ${RESOURCE_MARIADB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${RESOURCE_MARIADB_ROOT_PASSWORD}
+    restart: always
+
+volumes:
+  db_auth_data:
+  db_resource_data:
