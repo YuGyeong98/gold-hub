@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -25,6 +24,6 @@ public class RegisterUserRequest {
     private String password;
 
     public RegisterUserDto toServiceDto() {
-        return new RegisterUserDto(username, password, LocalDateTime.now(), LocalDateTime.now());
+        return new RegisterUserDto(username, password);
     }
 }
