@@ -3,8 +3,11 @@ package com.goldhub.auth_server.user.controller;
 import static org.springframework.http.HttpStatus.CREATED;
 
 import com.goldhub.auth_server.common.exception.ErrorResponse;
+import com.goldhub.auth_server.user.controller.request.LoginUserRequest;
 import com.goldhub.auth_server.user.controller.request.RegisterUserRequest;
+import com.goldhub.auth_server.user.controller.response.LoginUserResponse;
 import com.goldhub.auth_server.user.service.UserService;
+import com.goldhub.auth_server.user.service.dto.LoginUserDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -45,5 +48,22 @@ public class UserController {
         userService.register(request.toServiceDto());
 
         return ResponseEntity.status(CREATED).body("회원가입이 완료되었습니다.");
+    }
+
+    @PostMapping("/login")
+    @Operation(summary = "사용자 로그인")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "사용자 로그인 성공"),
+        @ApiResponse(
+            responseCode = "401",
+            description = "1. 존재하지 않는 아이디입니다.\n2. 비밀번호를 잘못 입력했습니다.",
+            content = {@Content(schema = @Schema(implementation = ErrorResponse.class))}
+        )
+    })
+    public ResponseEntity<LoginUserResponse> login(@RequestBody @Valid LoginUserRequest request) {
+        LoginUserDto user = userService.login(request.toServiceDto());
+        LoginUserResponse response = LoginUserResponse.of(user);
+
+        return ResponseEntity.ok(response);
     }
 }
