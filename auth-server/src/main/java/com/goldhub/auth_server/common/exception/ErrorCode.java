@@ -2,6 +2,7 @@ package com.goldhub.auth_server.common.exception;
 
 import static org.springframework.http.HttpStatus.CONFLICT;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,12 @@ import org.springframework.http.HttpStatus;
 @Getter
 @RequiredArgsConstructor
 public enum ErrorCode {
+
+    /**
+     * 401 - Unauthorized
+     */
+    USERNAME_UNAUTHORIZED(UNAUTHORIZED, "존재하지 않는 아이디입니다."),
+    PASSWORD_UNAUTHORIZED(UNAUTHORIZED, "비밀번호를 잘못 입력했습니다."),
 
     /**
      * 409 - Conflict
