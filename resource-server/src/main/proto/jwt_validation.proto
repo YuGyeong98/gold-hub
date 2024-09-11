@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.proto.jwtvalidation";
+option java_outer_classname = "JwtValidationProto";
+
+package jwtvalidation;
+
+service Jwt {
+  rpc getUserInfo (Token) returns (UserInfo) {}
+}
+
+message Token {
+  string token = 1;
+}
+
+message User {
+  string userId = 1;
+  string username = 2;
+}
+
+message UserInfo {
+  bool isValid = 1;
+  User user = 2;
+}
