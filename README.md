@@ -2,13 +2,17 @@
 
 ## Quick Start
 
-1. 애플리케이션 DB 실행
+1. goldhub 폴더 안에 `.env` 파일을 추가합니다.
+<img width="371" alt="image" src="https://github.com/user-attachments/assets/888f2dc0-7dd3-436d-a56f-4f339453851c">
+
+
+2. 애플리케이션 DB 실행
 
 ```
 docker compose up -d
 ```
 
-2. 애플리케이션 실행
+3. 애플리케이션 실행
 
 - 인텔리제이에서 `AuthServerApplication`, `ResourceServerApplication`을 각각 실행합니다.
 
