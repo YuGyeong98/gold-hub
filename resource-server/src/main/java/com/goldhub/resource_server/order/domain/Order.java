@@ -77,4 +77,8 @@ public class Order extends BaseEntity {
         this.price = price;
         this.deliveryAddress = deliveryAddress;
     }
+
+    public void updateStatus(OrderStatus status) {
+        this.status = status;
+    }
 }
