@@ -30,6 +30,8 @@ import org.springframework.hateoas.Link;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -97,6 +99,37 @@ public class OrderController {
         FindOrderPageResponse response = FindOrderPageResponse.of(orders, links);
 
         return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("/{orderId}")
+    @Operation(summary = "주문 상태 업데이트")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "주문 상태 업데이트 성공"),
+        @ApiResponse(
+            responseCode = "401",
+            description = "1. 로그인을 먼저 해주세요.\n2. 유효하지 않은 토큰입니다.",
+            content = {@Content(schema = @Schema(implementation = ErrorResponse.class))}
+        ),
+        @ApiResponse(
+            responseCode = "400",
+            description = "1. 구매 주문은 'ORDERED', 'DEPOSITED', 'SHIPPED' 상태만 가능합니다.\n2. 판매 주문은 'ORDERED', 'REMITTED', 'RECEIVED' 상태만 가능합니다.",
+            content = {@Content(schema = @Schema(implementation = ErrorResponse.class))}
+        ),
+        @ApiResponse(
+            responseCode = "404",
+            description = "해당 주문이 존재하지 않습니다.",
+            content = {@Content(schema = @Schema(implementation = ErrorResponse.class))}
+        )
+    })
+    public ResponseEntity<String> updateStatus(
+        @PathVariable @Parameter(description = "주문 식별자", example = "1") Long orderId,
+        @Pattern(regexp = "^(ORDERED|DEPOSITED|SHIPPED|REMITTED|RECEIVED)", message = "주문 상태는 'ORDERED', 'DEPOSITED', 'SHIPPED', 'REMITTED', 'RECEIVED' 중 하나만 가능합니다.")
+        @Parameter(description = "주문 상태", example = "DEPOSITED") @RequestParam String status,
+        @AuthUser String accessToken
+    ) {
+        orderService.updateStatus(status, orderId, accessToken);
+
+        return ResponseEntity.ok("주문 상태가 업데이트 되었습니다.");
     }
 
     private List<Link> getLinks(
