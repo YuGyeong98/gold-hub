@@ -15,6 +15,7 @@ public enum ErrorCode {
     /**
      * 401 - Unauthorized
      */
+    LOGIN_UNAUTHORIZED(UNAUTHORIZED, "로그인을 먼저 해주세요."),
     INVALID_TOKEN_UNAUTHORIZED(UNAUTHORIZED, "유효하지 않은 토큰입니다."),
 
     /**
