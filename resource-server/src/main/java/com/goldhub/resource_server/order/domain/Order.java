@@ -52,7 +52,7 @@ public class Order extends BaseEntity {
     private BigDecimal quantity;
 
     @Column(nullable = false)
-    private BigDecimal price;
+    private int price;
 
     @Column(nullable = false)
     private String deliveryAddress;
@@ -65,7 +65,7 @@ public class Order extends BaseEntity {
         OrderType type,
         Product product,
         BigDecimal quantity,
-        BigDecimal price,
+        int price,
         String deliveryAddress
     ) {
         this.orderNumber = orderNumber;

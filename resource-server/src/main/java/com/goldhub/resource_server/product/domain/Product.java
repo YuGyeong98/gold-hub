@@ -8,7 +8,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import java.math.BigDecimal;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,5 +27,5 @@ public class Product extends BaseEntity {
     private ProductType type;
 
     @Column(nullable = false)
-    private BigDecimal price;
+    private int price;
 }

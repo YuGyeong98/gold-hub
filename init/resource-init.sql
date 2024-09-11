@@ -1,10 +1,10 @@
 CREATE TABLE IF NOT EXISTS product
 (
     product_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    type       VARCHAR(50)    NOT NULL,
-    price      DECIMAL(10, 2) NOT NULL,
-    created_at TIMESTAMP(6)   NOT NULL,
-    updated_at TIMESTAMP(6)   NOT NULL
+    type       VARCHAR(50)  NOT NULL,
+    price      INT          NOT NULL,
+    created_at TIMESTAMP(6) NOT NULL,
+    updated_at TIMESTAMP(6) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS orders
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS orders
     status           VARCHAR(50)         NOT NULL,
     type             VARCHAR(50)         NOT NULL,
     quantity         DECIMAL(10, 2)      NOT NULL,
-    price            DECIMAL(20, 4)      NOT NULL,
+    price            INT                 NOT NULL,
     delivery_address VARCHAR(255)        NOT NULL,
     created_at       TIMESTAMP(6)        NOT NULL,
     updated_at       TIMESTAMP(6)        NOT NULL,
