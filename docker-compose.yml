@@ -1,16 +1,4 @@
 services:
-  auth-server:
-    build:
-      context: ./auth-server
-    ports:
-      - "8888:8888"
-      - "50051:50051"
-    environment:
-      SPRING_DATASOURCE_URL: ${AUTH_SPRING_DATASOURCE_URL}
-      SPRING_DATASOURCE_USERNAME: ${AUTH_SPRING_DATASOURCE_USERNAME}
-      SPRING_DATASOURCE_PASSWORD: ${AUTH_SPRING_DATASOURCE_PASSWORD}
-    depends_on:
-      - db_auth
   db_auth:
     image: mariadb:latest
     ports:
@@ -25,18 +13,6 @@ services:
       MARIADB_ROOT_PASSWORD: ${AUTH_MARIADB_ROOT_PASSWORD}
     restart: always
 
-  resource-server:
-    build:
-      context: ./resource-server
-    ports:
-      - "9999:9999"
-      - "50052:50052"
-    environment:
-      SPRING_DATASOURCE_URL: ${RESOURCE_SPRING_DATASOURCE_URL}
-      SPRING_DATASOURCE_USERNAME: ${RESOURCE_SPRING_DATASOURCE_USERNAME}
-      SPRING_DATASOURCE_PASSWORD: ${RESOURCE_SPRING_DATASOURCE_PASSWORD}
-    depends_on:
-      - db_resource
   db_resource:
     image: mariadb:latest
     ports:
