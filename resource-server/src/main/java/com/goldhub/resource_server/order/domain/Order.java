@@ -15,6 +15,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -33,7 +34,7 @@ public class Order extends BaseEntity {
     private String orderNumber;
 
     @Column(nullable = false)
-    private Long customerId;
+    private String customerId;
 
     @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
@@ -51,8 +52,29 @@ public class Order extends BaseEntity {
     private BigDecimal quantity;
 
     @Column(nullable = false)
-    private int price;
+    private BigDecimal price;
 
     @Column(nullable = false)
     private String deliveryAddress;
+
+    @Builder
+    public Order(
+        String orderNumber,
+        String customerId,
+        OrderStatus status,
+        OrderType type,
+        Product product,
+        BigDecimal quantity,
+        BigDecimal price,
+        String deliveryAddress
+    ) {
+        this.orderNumber = orderNumber;
+        this.customerId = customerId;
+        this.status = status;
+        this.type = type;
+        this.product = product;
+        this.quantity = quantity;
+        this.price = price;
+        this.deliveryAddress = deliveryAddress;
+    }
 }
