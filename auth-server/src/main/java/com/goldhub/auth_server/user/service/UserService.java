@@ -32,7 +32,7 @@ public class UserService {
 
     public LoginUserDto login(LoginUserDto dto) {
         User user = findUser(dto);
-        JwtToken token = jwtUtil.createToken(user.getId());
+        JwtToken token = jwtUtil.createToken(user.getId(), user.getUsername());
 
         return LoginUserDto.of(user, token);
     }
