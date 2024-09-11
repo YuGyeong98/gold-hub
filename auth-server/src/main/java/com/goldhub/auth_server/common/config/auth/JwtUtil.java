@@ -37,9 +37,10 @@ public class JwtUtil {
         this.refreshTokenExpTime = refreshTokenExpTime;
     }
 
-    public JwtToken createToken(Long userId) {
+    public JwtToken createToken(Long userId, String username) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("id", userId);
+        claims.put("userId", userId);
+        claims.put("username", username);
 
         Instant now = Instant.now();
 
@@ -80,7 +81,11 @@ public class JwtUtil {
     }
 
     public Long getUserId(String token) {
-        return parseClaims(token).get("id", Long.class);
+        return parseClaims(token).get("userId", Long.class);
+    }
+
+    public String getUsername(String token) {
+        return parseClaims(token).get("username", String.class);
     }
 
     public Claims parseClaims(String token) {
