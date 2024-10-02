@@ -2,12 +2,15 @@
 
 > 금 구매, 판매 주문을 관리하는 서비스
 
+<br/>
+
 ## ✨ 서비스 개요
 
 1. 회원가입, 로그인 인증
 2. 인증을 통해 금 구매, 판매 주문
 3. 인증을 담당하는 인증 서버(auth server)와 구매, 판매 주문을 수행하는 자원 서버(resource server) 분리
 4. gRPC를 통해 인증 서버와 자원 서버 간 통신
+
 <br/>
 
 ## 📚 사용 스택
@@ -40,6 +43,8 @@
 <img src="https://img.shields.io/badge/Swagger-85EA2D?style=flat-square&logo=Swagger&logoColor=black">
 </div>
 
+<br/>
+
 ## 💾 ERD
 
 ![ERD](https://github.com/user-attachments/assets/b4f31d0c-04a7-4c89-83f0-d8065e0619eb)
@@ -62,6 +67,8 @@
   ex) `ORDER-20241002-00001`
 - 수량(quantity) 단위는 그램(g)이며, 정확성과 신뢰성을 보장하기 위해 `DECIMAL` 타입을 사용하여 최대 정수 8자리, 소수 2자리까지 저장
 
+<br/>
+
 ## 📁 Project Structure
 
 - Layered Architecture를 적용했습니다.
@@ -82,11 +89,15 @@
 ├── proto # gRPC 통신에 필요한 proto 파일
 ```
 
+<br/>
+
 ## 🌠 API 명세서
 
 - 로컬 서버 구동
   후 [Auth Server Swagger](http://localhost:8888/swagger-ui/index.html), [Resource Server Swagger](http://localhost:9999/swagger-ui/index.html)
 - [Postman](https://documenter.getpostman.com/view/15632236/2sAXxJiuv9)
+
+<br/>
 
 ## 💻 Developer
 
